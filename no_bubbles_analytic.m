@@ -1,6 +1,6 @@
 % No bubbles problem, analytical solution
 
-Pe = 10;
+Pe = 100;
 dx = 0.01;
 dz = dx;
 
