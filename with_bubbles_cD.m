@@ -1,4 +1,4 @@
-% No bubble problem, method of lines solution
+% With bubble problem, method of lines solution
 %
 % Author: Javier Almonacid
 %         javiera@sfu.ca
@@ -14,12 +14,15 @@ clear; clc;
 
 %% Single Figure
 
-Pe = 2000;
-%w = @(x) x.*(1-x);  % Non-dimensional velocity (may be zero along the boundary)
-w = @(x) 1 + 0.0*x;
+Pe = 1e+03;
+w = @(x) x.*(1-x);  % Non-dimensional velocity (may be zero along the boundary)
 dx = 0.01;         % Spatial mesh size
 
-[X,Z,C] = find_cD_not_shifted(dx,Pe,w,@(c) 0.0*c);
+alpha = 0.5;
+beta = 50;
+f = @(c) alpha*(1+tanh(beta*(c-1)));
+
+[X,Z,C] = find_cD_not_shifted(dx,Pe,w,f);
 figure(1)
 surf(X,Z,C,'EdgeColor','none')
 view([0 90])
@@ -29,7 +32,7 @@ colormap('jet')
 
 xlabel('$\hat{x}$','Interpreter','latex','FontSize',16)
 ylabel('$\hat{z}$','Interpreter','latex','FontSize',16)
-title(['\bf Concentration $\widehat{c}_D$',', Pe = ',num2str(Pe)],'Interpreter','latex','FontSize',14)
+title('\bf Concentration $\widehat{c}_D$','Interpreter','latex','FontSize',14)
 
 %% Contours of csat
 
@@ -38,13 +41,12 @@ clf
 Pe = [250 500 750 1000 1250 1500 1750 2000];
 w = @(x) x.*(1-x);  % Non-dimensional velocity (may be zero along the boundary)
 dx = 0.01;         % Spatial mesh size
-csat = 2.59e-04;
+csat = 1e-03;
 
 tic
 for k = 1:length(Pe)
-   [X,Z,C] = find_cD_not_shifted(dx,Pe(k),w,@(t) 0*t);
-   % Rescale
-   disp(['Solved for Reduced Pe =',num2str(Pe(k))])
+   [X,Z,C] = find_cD_not_shifted(dx,Pe(k),w,f);
+   disp(['Solved for Pe =',num2str(Pe(k))])
    contour(X,Z,C,[csat; csat],'LineWidth',1.5)
    hold on
    grid on
@@ -52,26 +54,21 @@ end
 toc
 
 txt = '\leftarrow Pe = 250';
-text(0.61,0.9,txt,'FontSize',12)
+text(0.54,0.9,txt,'FontSize',12)
 
 txt = '\leftarrow Pe = 500';
-text(0.43,0.8,txt,'FontSize',12)
+text(0.38,0.8,txt,'FontSize',12)
 
 txt = '\leftarrow Pe = 750';
-text(0.35,0.7,txt,'FontSize',12)
+text(0.3,0.7,txt,'FontSize',12)
 
 txt = '\leftarrow Pe = 1000';
-text(0.29,0.6,txt,'FontSize',12)
+text(0.25,0.6,txt,'FontSize',12)
 
 txt = 'Pe = 2000 \rightarrow';
-text(0.07,0.9,txt,'FontSize',12)
+text(0.02,0.9,txt,'FontSize',12)
 
 %%
 xlabel('$\hat{x}$','Interpreter','latex','FontSize',16)
 ylabel('$\hat{z}$','Interpreter','latex','FontSize',16)
-title('\bf Contours of $c_D = c_{sat} = 2.59\cdot 10^{-4}$ mol/L','Interpreter','latex','FontSize',14)
-
-
-
-
-
+title('\bf Contours of $\widehat{c}_D = \widehat{c}_{sat} = \cdot 10^{-3}$','Interpreter','latex','FontSize',14)

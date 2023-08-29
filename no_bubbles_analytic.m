@@ -23,3 +23,8 @@ surf(X,Z,C,'EdgeColor','none')
 colorbar
 max(max(C))
 view([0 90])
+
+xlabel('$\hat{x}$','Interpreter','latex','FontSize',16)
+ylabel('$\hat{z}$','Interpreter','latex','FontSize',16)
+title('\bf Analytical solution, Pe = 100','Interpreter','latex','FontSize',14)
+colormap('jet')
