@@ -32,8 +32,9 @@ function out = find_concentration_dissolved_gas(reduced_pe, ...
 %      out.Z: meshgrid for z coordinate
 %      out.C: concentration of dissolved gas.
 %
-%  Author: Javier Almonacid (javiera@sfu.ca)
-%  Date:   August 29, 2023
+%  Authors: Javier Almonacid, Simon Fraser University
+%           Matthew Shirley, University of Oxford
+%  Date:    June 15, 2023
 %    
 
 % Create mesh in x

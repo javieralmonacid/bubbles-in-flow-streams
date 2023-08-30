@@ -26,8 +26,9 @@ function out = find_concentration_bubbles(reduced_fr, ...
 %      out.C: Concentration of bubbles that can be plot along sol_cd.X and
 %      sol_cd.Z
 %
-%  Author: Javier Almonacid (javiera@sfu.ca)
-%  Date:   August 29, 2023
+%  Authors: Javier Almonacid, Simon Fraser University
+%           Matthew Shirley, University of Oxford
+%  Date:    June 15, 2023
 %  
 
 % Create function from data points along the left boundary of cd
