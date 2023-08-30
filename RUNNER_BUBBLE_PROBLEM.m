@@ -17,14 +17,14 @@ clear; clc; close all;
 %% Single computation
 
 % Input parameters
-reduced_Pe = 2000;  % Reduced Peclet number
+reduced_Pe = 500;  % Reduced Peclet number
 reduced_Fr = 4;
 dx = 0.01/4;        % Spatial mesh size
-Da_t = 25;          % Damkohler number (dissolved gas)
-Da_s = 20;          % Damkohler number (bubbles)
+Da_t = 500;          % Damkohler number (dissolved gas)
+Da_s = 1000;          % Damkohler number (bubbles)
 lambda = 1;
-xi = 10;
-epsilon = 1e-4;
+xi = 15;
+epsilon = 1e-3;
 
 % Compute non-dimensional solution
 sol_CD = find_concentration_dissolved_gas(reduced_Pe,dx,Da_t,Da_s,lambda,xi);
