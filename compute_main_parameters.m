@@ -15,7 +15,7 @@
 clear; clc; close all;
 
 % Compute [w], hereafter called wmax
-delta_p = 1e+04;     % Pa (guessed)
+delta_p = 1e+03;     % Pa (guessed)
 h = 1;               % m
 a = 1e-4;            % m
 mu0_water = 8.9e-04; % Pa s
@@ -40,7 +40,7 @@ Rcal_s = 10; % Guessed
 Da_s = delta * h * Rcal_s / (D_hydrogen * cd_sat_hydrogen);
 
 % Compute epsilon;
-bubble_radius = 1e-5; % Guessed(ish), literature says 1e-4
+bubble_radius = 1e-6; % Guessed(ish), literature says 1e-4
 epsilon = bubble_radius / a;
 
 % Compute lambda
