@@ -14,6 +14,7 @@
 clear; clc; close all;
 
 %% Single computation
+disp('Solving for a single computation')
 
 % Input parameters
 reduced_Pe = 2000;  % Reduced Peclet number
@@ -36,7 +37,10 @@ title(['Concentration $\widehat{c}_d$ ($\mathcal{P} =$ ',num2str(reduced_Pe), ..
        ', $Da_t =$ ', num2str(Da_t), ')'], ...
        'Interpreter', 'latex', 'FontSize', 14)
 
+exportgraphics(gcf,'figs/nobubble_00.png', 'Resolution', 300)
+
 %% Computation over 3 different Pe numbers
+disp('Solving for 3 different Peclet numbers')
 
 Pe = [500 1000 1500]; % Reduced Peclet numbers
 dx = 0.01/4;          % Spatial mesh size
@@ -55,7 +59,7 @@ for i = 1:length(Pe)
     surf(sol.X,sol.Z,sol.C,'EdgeColor','none')
     view([0 90])
     colorbar
-    clim([0 max_cd])
+    caxis([0 max_cd])
     colormap('jet')
     xlabel('$\hat{x}$','Interpreter','latex','FontSize',16)
     ylabel('$\hat{z}$','Interpreter','latex','FontSize',16)
@@ -64,9 +68,10 @@ for i = 1:length(Pe)
            'Interpreter', 'latex', 'FontSize', 14)
 end
 set(gcf,'Position',[977 726 1107 239])
-exportgraphics(gcf,'figs/nobubble_01.pdf', 'ContentType', 'vector')
+exportgraphics(gcf,'figs/nobubble_01.png', 'Resolution', 300)
 
 %% Computation over a series of (reduced) Pe numbers to compute cd=cd_sat
+disp('Solving for a series of Pe numbers')
 
 figure(3)
 clf
@@ -104,4 +109,4 @@ xlabel('$\hat{x}$','Interpreter','latex','FontSize',16)
 ylabel('$\hat{z}$','Interpreter','latex','FontSize',16)
 title('\bf Contours of $c_d = c_{d,sat}$ - No bubbles','Interpreter','latex','FontSize',14)
 
-exportgraphics(gcf,'figs/nobubble_02.pdf', 'ContentType', 'vector')
+exportgraphics(gcf,'figs/nobubble_02.png', 'Resolution', 300)
