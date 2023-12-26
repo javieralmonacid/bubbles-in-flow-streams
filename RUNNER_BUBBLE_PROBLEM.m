@@ -47,7 +47,7 @@ subplot(1,2,1)
 surf(sol_CD.X,sol_CD.Z,sol_CD.C,'EdgeColor','none')
 view([0 90])
 colorbar
-clim([min_colorbar,max_colorbar])
+caxis([min_colorbar,max_colorbar])
 colormap('jet')
 
 xlabel('$\hat{x}$','Interpreter','latex','FontSize',16)
@@ -60,7 +60,7 @@ subplot(1,2,2)
 surf(sol_CD.X,sol_CD.Z,sol_CB.C,'EdgeColor','none')
 view([0 90])
 colorbar
-clim([min_colorbar,max_colorbar])
+caxis([min_colorbar,max_colorbar])
 colormap('jet')
 xlabel('$\hat{x}$','Interpreter','latex','FontSize',16)
 ylabel('$\hat{z}$','Interpreter','latex','FontSize',16)
