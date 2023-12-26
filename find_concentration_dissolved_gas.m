@@ -43,18 +43,20 @@ function out = find_concentration_dissolved_gas(reduced_pe, ...
 N = ceil(1/dx);
 if nargin == 3
     x = linspace(0,1,N);
+    z = x;
 else
     x = linspace(2*epsilon, 1-2*epsilon, N);
+    z = linspace(0,1,N);
 end
 dx = x(2)-x(1);
 
 if nargin == 3
     qleft = @(cd) Da_t + 0*cd;
-elseif nargin == 6
+elseif nargin == 7
     qs = @(cd) 1 + tanh(xi * (cd - 1));
     qleft = @(cd) (Da_t - Da_s * qs(cd))./(1 + Da_s * lambda * qs(cd));
 else
-    error('Incorrect number of arguments. Number of arguments allowed: 3 or 6')
+    error('Incorrect number of arguments. Number of arguments allowed: 3 or 7')
 end
 
 % Mass matrix
@@ -66,7 +68,7 @@ sol = ode15s(@(t,y) rhs_dissolved_gas_system(t,y,qleft,dx), ...
 
 C = (deval(sol, x))';  % Evaluate function on uniform grid
 C = C(:,2:end-1);      % Remove info from ghost nodes
-[X,Z] = meshgrid(x,x); % Mesh for non-dimensional space variables.
+[X,Z] = meshgrid(x,z); % Mesh for non-dimensional space variables.
 
 out.X = X;
 out.Z = Z;
