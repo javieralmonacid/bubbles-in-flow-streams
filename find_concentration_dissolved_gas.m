@@ -3,7 +3,8 @@ function out = find_concentration_dissolved_gas(reduced_pe, ...
                                                 Da_t, ...
                                                 Da_s, ...
                                                 lambda, ...
-                                                xi)
+                                                xi, ...
+                                                epsilon)
 % FIND_CONCENTRATION_DISSOLVED_GAS finds the concentration
 % of dissolved gas in the system using the method of lines.
 %
@@ -25,6 +26,7 @@ function out = find_concentration_dissolved_gas(reduced_pe, ...
 %                advection
 %    xi:         dimensionless quantity that controls the rate of
 %                bubble generation
+%    epsilon:    bubble radius to channel width ratio
 %
 %  Output parameters:
 %    out (struct, nondimensional):
@@ -38,8 +40,13 @@ function out = find_concentration_dissolved_gas(reduced_pe, ...
 %    
 
 % Create mesh in x
-x = 0:dx:1;
-N = length(x);
+N = ceil(1/dx);
+if nargin == 3
+    x = linspace(0,1,N);
+else
+    x = linspace(2*epsilon, 1-2*epsilon, N);
+end
+dx = x(2)-x(1);
 
 if nargin == 3
     qleft = @(cd) Da_t + 0*cd;
@@ -64,5 +71,6 @@ C = C(:,2:end-1);      % Remove info from ghost nodes
 out.X = X;
 out.Z = Z;
 out.C = C;
+out.dx = dx;
 
 
